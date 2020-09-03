@@ -1,13 +1,13 @@
 # Default AWS provider.
 provider "aws" {
-  version = "v2.9.0"         # Use latest if possible. See https://github.com/terraform-providers/terraform-provider-aws/releases
+  version = "v2.9.0" # Use latest if possible. See https://github.com/terraform-providers/terraform-provider-aws/releases
   region  = "ap-southeast-1"
 }
 
 # us-east-1 provider. Used by webacl_supporting_resources.
 # If WAF resources are meant to protect Cloudfront, they should be Global Resources, and Global Resources are located in us-east-1.
 provider "aws" {
-  version = "v2.9.0"    # Use latest if possible. See https://github.com/terraform-providers/terraform-provider-aws/releases
+  version = "v2.9.0" # Use latest if possible. See https://github.com/terraform-providers/terraform-provider-aws/releases
   region  = "us-east-1"
   alias   = "us-east-1"
 }
@@ -21,8 +21,7 @@ provider "random" {
 # please read the description of each variable in the variables.tf file:
 # https://github.com/traveloka/terraform-aws-waf-owasp-top-10-rules/blob/master/variables.tf 
 module "owasp_top_10_rules" {
-  source  = "traveloka/waf-owasp-top-10-rules/aws"
-  version = "v0.1.1"
+  source = "traveloka/waf-owasp-top-10-rules/aws?ref=v0.1.0"
 
   product_domain = "tsi"
   service_name   = "tsiwaf"
@@ -72,8 +71,8 @@ module "webacl_supporting_resources" {
   # [IMPORTANT]
   # Pass the us-east-1 provider like this.
   # This will make all resources created by this module are on us-east-1 region.
-  providers {
-    aws = "aws.us-east-1"
+  providers = {
+    aws = aws.us-east-1
   }
 
   product_domain = "tsi"
@@ -99,7 +98,7 @@ resource "aws_waf_web_acl" "tsiwaf_webacl" {
   # Configuration block to enable WAF logging.
   logging_configuration {
     # Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream
-    log_destination = "${module.webacl_supporting_resources.firehose_delivery_stream_arn}"
+    log_destination = module.webacl_supporting_resources.firehose_delivery_stream_arn
   }
 
   # Configuration block with action that you want AWS WAF to take 
@@ -117,7 +116,7 @@ resource "aws_waf_web_acl" "tsiwaf_webacl" {
     priority = "0"
 
     # ID of the associated WAF rule
-    rule_id = "${module.owasp_top_10_rules.rule_group_id}"
+    rule_id = module.owasp_top_10_rules.rule_group_id
 
     # Valid values are `GROUP`, `RATE_BASED`, and `REGULAR`
     # The rule type, either REGULAR, as defined by Rule, 
@@ -136,7 +135,7 @@ resource "aws_waf_web_acl" "tsiwaf_webacl" {
 
   rules {
     priority = "1"
-    rule_id  = "${aws_waf_rate_based_rule.rate_limiter_rule.id}"
+    rule_id  = aws_waf_rate_based_rule.rate_limiter_rule.id
     type     = "RATE_BASED"
 
     # Only used if type is NOT `GROUP`.
@@ -150,4 +149,3 @@ resource "aws_waf_web_acl" "tsiwaf_webacl" {
 }
 
 # What you need to do next is modify your cloudfront to use a WebACL
-
