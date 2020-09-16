@@ -9,7 +9,7 @@ output "rule_group_id" {
 # Rename the resource and run `terraform state mv` to apply the rename in the
 # state. Detailed information on the `state move` command can be found in the
 # documentation online: https://www.terraform.io/docs/commands/state/mv.html
-output "01_sql_injection_rule_id" {
+output "sql_injection_rule_id_01" {
   description = "AWS WAF Rule which mitigates SQL Injection Attacks."
   value       = module.owasp_top_10_rules["01_sql_injection_rule_id"]
 }
@@ -20,7 +20,7 @@ output "01_sql_injection_rule_id" {
 # Rename the resource and run `terraform state mv` to apply the rename in the
 # state. Detailed information on the `state move` command can be found in the
 # documentation online: https://www.terraform.io/docs/commands/state/mv.html
-output "02_auth_token_rule_id" {
+output "auth_token_rule_id_02" {
   description = "AWS WAF Rule which blacklists bad/hijacked JWT tokens or session IDs."
   value       = module.owasp_top_10_rules["02_auth_token_rule_id"]
 }
@@ -31,7 +31,7 @@ output "02_auth_token_rule_id" {
 # Rename the resource and run `terraform state mv` to apply the rename in the
 # state. Detailed information on the `state move` command can be found in the
 # documentation online: https://www.terraform.io/docs/commands/state/mv.html
-output "03_xss_rule_id" {
+output "xss_rule_id_03" {
   description = "AWS WAF Rule which mitigates Cross Site Scripting Attacks."
   value       = module.owasp_top_10_rules["03_xss_rule_id"]
 }
@@ -42,7 +42,7 @@ output "03_xss_rule_id" {
 # Rename the resource and run `terraform state mv` to apply the rename in the
 # state. Detailed information on the `state move` command can be found in the
 # documentation online: https://www.terraform.io/docs/commands/state/mv.html
-output "04_paths_rule_id" {
+output "paths_rule_id_04" {
   description = "AWS WAF Rule which mitigates Path Traversal, LFI, RFI."
   value       = module.owasp_top_10_rules["04_paths_rule_id"]
 }
@@ -53,9 +53,9 @@ output "04_paths_rule_id" {
 # Rename the resource and run `terraform state mv` to apply the rename in the
 # state. Detailed information on the `state move` command can be found in the
 # documentation online: https://www.terraform.io/docs/commands/state/mv.html
-output "06_php_insecure_rule_id" {
+output "php_insecure_rule_id_06" {
   description = "AWS WAF Rule which mitigates PHP Specific Security Misconfigurations."
-  value       = module.owasp_top_10_rules["06_php_insecure_rule_id"]
+  value       = module.owasp_top_10_rules["php_insecure_rule_id_06"]
 }
 
 # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to begin a
@@ -64,9 +64,9 @@ output "06_php_insecure_rule_id" {
 # Rename the resource and run `terraform state mv` to apply the rename in the
 # state. Detailed information on the `state move` command can be found in the
 # documentation online: https://www.terraform.io/docs/commands/state/mv.html
-output "07_size_restriction_rule_id" {
+output "size_restriction_rule_id_07" {
   description = "AWS WAF Rule which mitigates abnormal requests via size restrictions."
-  value       = module.owasp_top_10_rules["07_size_restriction_rule_id"]
+  value       = module.owasp_top_10_rules["size_restriction_rule_id_07"]
 }
 
 # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to begin a
@@ -75,9 +75,9 @@ output "07_size_restriction_rule_id" {
 # Rename the resource and run `terraform state mv` to apply the rename in the
 # state. Detailed information on the `state move` command can be found in the
 # documentation online: https://www.terraform.io/docs/commands/state/mv.html
-output "08_csrf_rule_id" {
+output "csrf_rule_id_08" {
   description = "AWS WAF Rule which enforces the presence of CSRF token in request header."
-  value       = module.owasp_top_10_rules["08_csrf_rule_id"]
+  value       = module.owasp_top_10_rules["csrf_rule_id_08"]
 }
 
 # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to begin a
@@ -86,9 +86,9 @@ output "08_csrf_rule_id" {
 # Rename the resource and run `terraform state mv` to apply the rename in the
 # state. Detailed information on the `state move` command can be found in the
 # documentation online: https://www.terraform.io/docs/commands/state/mv.html
-output "09_server_side_include_rule_id" {
+output "server_side_include_rule_id_09" {
   description = "AWS WAF Rule which blocks request patterns for webroot objects that shouldn't be directly accessible."
-  value       = module.owasp_top_10_rules["09_server_side_include_rule_id"]
+  value       = module.owasp_top_10_rules["server_side_include_rule_id_09"]
 }
 
 output "webacl_traffic_logging_bucket_name" {

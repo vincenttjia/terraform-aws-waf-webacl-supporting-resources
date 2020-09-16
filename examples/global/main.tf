@@ -21,7 +21,7 @@ provider "random" {
 # please read the description of each variable in the variables.tf file:
 # https://github.com/traveloka/terraform-aws-waf-owasp-top-10-rules/blob/master/variables.tf 
 module "owasp_top_10_rules" {
-  source = "traveloka/waf-owasp-top-10-rules/aws?ref=v1.0.0"
+  source = "git@github.com:traveloka/terraform-aws-waf-owasp-top-10-rules.git?ref=v1.0.0"
 
   product_domain = "tsi"
   service_name   = "tsiwaf"
@@ -65,8 +65,8 @@ module "webacl_supporting_resources" {
 
   # Open the link above to see what the latest version is. Highly encouraged to use the latest version if possible.
 
-  source  = "traveloka/waf-webacl-supporting-resources/aws"
-  version = "0.2.0"
+  #source  = "traveloka/waf-webacl-supporting-resources/aws?ref=v0.2.0"
+  source = "../../"
 
   # [IMPORTANT]
   # Pass the us-east-1 provider like this.
