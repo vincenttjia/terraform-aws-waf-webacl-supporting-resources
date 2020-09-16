@@ -82,6 +82,7 @@ module "webacl_supporting_resources" {
 
   s3_logging_bucket = "<name-of-the-bucket>" # Logging bucket should be in the same region as the bucket
 
+  s3_kms_key_arn           = "xxxx"
   firehose_buffer_size     = "128"
   firehose_buffer_interval = "60"
 }
