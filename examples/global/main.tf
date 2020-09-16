@@ -65,7 +65,6 @@ module "webacl_supporting_resources" {
 
   # Open the link above to see what the latest version is. Highly encouraged to use the latest version if possible.
 
-  #source  = "traveloka/waf-webacl-supporting-resources/aws?ref=v0.2.0"
   source = "../../"
 
   # [IMPORTANT]
