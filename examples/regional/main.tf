@@ -14,7 +14,7 @@ provider "random" {
 # please read the description of each variable in the variables.tf file:
 # https://github.com/traveloka/terraform-aws-waf-owasp-top-10-rules/blob/master/variables.tf 
 module "owasp_top_10_rules" {
-  source = "traveloka/waf-owasp-top-10-rules/aws?ref=v0.1.0"
+  source = "traveloka/waf-owasp-top-10-rules/aws?ref=v1..0"
 
   product_domain = "tsi"
   service_name   = "tsiwaf"
