@@ -1,6 +1,6 @@
 # AWS provider.
 provider "aws" {
-  version = "v2.9.0"         # Use latest if possible. See https://github.com/terraform-providers/terraform-provider-aws/releases
+  version = "v2.9.0" # Use latest if possible. See https://github.com/terraform-providers/terraform-provider-aws/releases
   region  = "ap-southeast-1"
 }
 
@@ -14,8 +14,7 @@ provider "random" {
 # please read the description of each variable in the variables.tf file:
 # https://github.com/traveloka/terraform-aws-waf-owasp-top-10-rules/blob/master/variables.tf 
 module "owasp_top_10_rules" {
-  source  = "traveloka/waf-owasp-top-10-rules/aws"
-  version = "v0.1.0"
+  source = "git@github.com:traveloka/terraform-aws-waf-owasp-top-10-rules.git?ref=v1.0.0"
 
   product_domain = "tsi"
   service_name   = "tsiwaf"
@@ -59,8 +58,7 @@ module "webacl_supporting_resources" {
 
   # Open the link above to see what the latest version is. Highly encouraged to use the latest version if possible.
 
-  source  = "traveloka/waf-webacl-supporting-resources/aws"
-  version = "0.2.0"
+  source = "../.."
 
   product_domain = "tsi"
   service_name   = "tsiwaf"
@@ -69,6 +67,7 @@ module "webacl_supporting_resources" {
 
   s3_logging_bucket = "<bucket-for-logging>" # Logging bucket should be in the same region as the bucket
 
+  s3_kms_key_arn           = "xxxx"
   firehose_buffer_size     = "128"
   firehose_buffer_interval = "900"
 }
@@ -85,7 +84,7 @@ resource "aws_wafregional_web_acl" "tsiwaf_webacl" {
   # Configuration block to enable WAF logging.
   logging_configuration {
     # Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream
-    log_destination = "${module.webacl_supporting_resources.firehose_delivery_stream_arn}"
+    log_destination = module.webacl_supporting_resources.firehose_delivery_stream_arn
   }
 
   # Configuration block with action that you want AWS WAF to take 
@@ -103,7 +102,7 @@ resource "aws_wafregional_web_acl" "tsiwaf_webacl" {
     priority = "0"
 
     # ID of the associated WAF rule
-    rule_id = "${module.owasp_top_10_rules.rule_group_id}"
+    rule_id = module.owasp_top_10_rules.rule_group_id
 
     # Valid values are `GROUP`, `RATE_BASED`, and `REGULAR`
     # The rule type, either REGULAR, as defined by Rule, 
@@ -122,7 +121,7 @@ resource "aws_wafregional_web_acl" "tsiwaf_webacl" {
 
   rule {
     priority = "1"
-    rule_id  = "${aws_wafregional_rate_based_rule.rate_limiter_rule.id}"
+    rule_id  = aws_wafregional_rate_based_rule.rate_limiter_rule.id
     type     = "RATE_BASED"
 
     # Only used if type is NOT `GROUP`.
@@ -138,11 +137,12 @@ resource "aws_wafregional_web_acl" "tsiwaf_webacl" {
 # Only available for regional WAF - association with alb, will enable the WAF WebACL on a certain ALB
 resource "aws_wafregional_web_acl_association" "alb" {
   resource_arn = "arn:aws:elasticloadbalancing:ap-southeast-1:<account-id>:loadbalancer/app/<lb-name>/<lb-id>" # ARN of the ALB
-  web_acl_id   = "${aws_wafregional_web_acl.tsiwaf_webacl.id}"
+  web_acl_id   = aws_wafregional_web_acl.tsiwaf_webacl.id
 }
 
 # Only available for regional WAF - association with api gateway, will enable the WAF WebACL on a certain API Gateway
 resource "aws_wafregional_web_acl_association" "api" {
   resource_arn = "arn:aws:apigateway:ap-southeast-1::/restapis/<rest-api-id>/stages/<stage-name>" # ARN of the API Gateway stage
-  web_acl_id   = "${aws_wafregional_web_acl.tsiwaf_webacl.id}"
+  web_acl_id   = aws_wafregional_web_acl.tsiwaf_webacl.id
 }
+
