@@ -14,7 +14,6 @@ resource "random_id" "this" {
 # S3 Bucket to store WebACL Traffic Logs. This resource is needed by Amazon Kinesis Firehose as data delivery output target.
 resource "aws_s3_bucket" "webacl_traffic_information" {
   bucket = "${lower(var.service_name)}-webacl-${data.aws_region.this.name}-${data.aws_caller_identity.this.account_id}-${random_id.this.hex}"
-  region = data.aws_region.this.name
   acl    = "private"
 
   logging {
