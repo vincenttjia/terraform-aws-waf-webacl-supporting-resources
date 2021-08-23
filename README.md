@@ -66,7 +66,7 @@ Doesn't have any dependencies to any other Terraform module
 
 ## Terraform Versions
 
-Created and tested using Terraform version `0.11.14`
+Created and tested using Terraform version `0.12.31`
 
 ## Terraform Providers
 
