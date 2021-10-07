@@ -11,7 +11,7 @@ output "rule_group_id" {
 # documentation online: https://www.terraform.io/docs/commands/state/mv.html
 output "sql_injection_rule_id_01" {
   description = "AWS WAF Rule which mitigates SQL Injection Attacks."
-  value       = module.owasp_top_10_rules["01_sql_injection_rule_id"]
+  value       = module.owasp_top_10_rules.rule01_sql_injection_rule_id
 }
 
 # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to begin a
@@ -22,7 +22,7 @@ output "sql_injection_rule_id_01" {
 # documentation online: https://www.terraform.io/docs/commands/state/mv.html
 output "auth_token_rule_id_02" {
   description = "AWS WAF Rule which blacklists bad/hijacked JWT tokens or session IDs."
-  value       = module.owasp_top_10_rules["02_auth_token_rule_id"]
+  value       = module.owasp_top_10_rules.rule02_auth_token_rule_id
 }
 
 # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to begin a
@@ -33,7 +33,7 @@ output "auth_token_rule_id_02" {
 # documentation online: https://www.terraform.io/docs/commands/state/mv.html
 output "xss_rule_id_03" {
   description = "AWS WAF Rule which mitigates Cross Site Scripting Attacks."
-  value       = module.owasp_top_10_rules["03_xss_rule_id"]
+  value       = module.owasp_top_10_rules.rule03_xss_rule_id
 }
 
 # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to begin a
@@ -44,7 +44,7 @@ output "xss_rule_id_03" {
 # documentation online: https://www.terraform.io/docs/commands/state/mv.html
 output "paths_rule_id_04" {
   description = "AWS WAF Rule which mitigates Path Traversal, LFI, RFI."
-  value       = module.owasp_top_10_rules["04_paths_rule_id"]
+  value       = module.owasp_top_10_rules.rule04_paths_rule_id
 }
 
 # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to begin a
@@ -55,7 +55,7 @@ output "paths_rule_id_04" {
 # documentation online: https://www.terraform.io/docs/commands/state/mv.html
 output "php_insecure_rule_id_06" {
   description = "AWS WAF Rule which mitigates PHP Specific Security Misconfigurations."
-  value       = module.owasp_top_10_rules["php_insecure_rule_id_06"]
+  value       = module.owasp_top_10_rules.rule06_php_insecure_rule_id
 }
 
 # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to begin a
@@ -66,7 +66,7 @@ output "php_insecure_rule_id_06" {
 # documentation online: https://www.terraform.io/docs/commands/state/mv.html
 output "size_restriction_rule_id_07" {
   description = "AWS WAF Rule which mitigates abnormal requests via size restrictions."
-  value       = module.owasp_top_10_rules["size_restriction_rule_id_07"]
+  value       = module.owasp_top_10_rules.rule07_size_restriction_rule_id
 }
 
 # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to begin a
@@ -77,7 +77,7 @@ output "size_restriction_rule_id_07" {
 # documentation online: https://www.terraform.io/docs/commands/state/mv.html
 output "csrf_rule_id_08" {
   description = "AWS WAF Rule which enforces the presence of CSRF token in request header."
-  value       = module.owasp_top_10_rules["csrf_rule_id_08"]
+  value       = module.owasp_top_10_rules.rule08_csrf_rule_id
 }
 
 # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to begin a
@@ -88,7 +88,7 @@ output "csrf_rule_id_08" {
 # documentation online: https://www.terraform.io/docs/commands/state/mv.html
 output "server_side_include_rule_id_09" {
   description = "AWS WAF Rule which blocks request patterns for webroot objects that shouldn't be directly accessible."
-  value       = module.owasp_top_10_rules["server_side_include_rule_id_09"]
+  value       = module.owasp_top_10_rules.rule09_server_side_include_rule_id
 }
 
 output "webacl_traffic_logging_bucket_name" {

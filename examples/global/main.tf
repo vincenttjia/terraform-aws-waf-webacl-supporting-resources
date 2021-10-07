@@ -1,19 +1,19 @@
 # Default AWS provider.
 provider "aws" {
-  version = "v2.9.0" # Use latest if possible. See https://github.com/terraform-providers/terraform-provider-aws/releases
+  version = ">= 3.0.0" # Use latest if possible. See https://github.com/terraform-providers/terraform-provider-aws/releases
   region  = "ap-southeast-1"
 }
 
 # us-east-1 provider. Used by webacl_supporting_resources.
 # If WAF resources are meant to protect Cloudfront, they should be Global Resources, and Global Resources are located in us-east-1.
 provider "aws" {
-  version = "v2.9.0" # Use latest if possible. See https://github.com/terraform-providers/terraform-provider-aws/releases
+  version = ">= 3.0.0" # Use latest if possible. See https://github.com/terraform-providers/terraform-provider-aws/releases
   region  = "us-east-1"
   alias   = "us-east-1"
 }
 
 provider "random" {
-  version = "v2.1.2" # Use latest if possible. See https://github.com/terraform-providers/terraform-provider-random/releases
+  version = "~> 2.1.2" # Use latest if possible. See https://github.com/terraform-providers/terraform-provider-random/releases
 }
 
 # AWS WAF Rules for OWASP Top 10 security risks protection.
@@ -81,7 +81,7 @@ module "webacl_supporting_resources" {
 
   s3_logging_bucket = "<name-of-the-bucket>" # Logging bucket should be in the same region as the bucket
 
-  s3_kms_key_arn           = "xxxx"
+  s3_kms_key_arn           = "xxx"
   firehose_buffer_size     = "128"
   firehose_buffer_interval = "60"
 }

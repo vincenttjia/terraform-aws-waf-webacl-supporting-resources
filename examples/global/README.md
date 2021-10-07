@@ -5,6 +5,8 @@ Additional resources like OWASP Top 10 security protection rules are created usi
 
 It will also show you how to create WebACL and adding the rules into it.
 
+In order to use this example, please change `s3_logging_bucket` and `s3_kms_key_arn` to real value
+
 For AWS WAF on ALB or API Gateway is a little bit different, you can see the example here: [waf regional: for ALB and API Gateway](../regional)
 
 ## Author

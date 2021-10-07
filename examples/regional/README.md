@@ -5,6 +5,8 @@ Additional resources like OWASP Top 10 security protection rules are created usi
 
 It will also show you how to create WebACL, adding the rules into it, and create its association with ALB and API Gateway.
 
+In order to use this example, please change `s3_logging_bucket` and `s3_kms_key_arn` to real value. Also please change `resource_arn` of `aws_wafregional_web_acl_association` resources to real value 
+
 For AWS WAF on Cloudfront is a little bit different, you can see the example here: [waf global: for Cloudfront](../global)
 
 ## Author

@@ -1,12 +1,12 @@
 # AWS provider.
 provider "aws" {
-  version = "v2.9.0" # Use latest if possible. See https://github.com/terraform-providers/terraform-provider-aws/releases
+  version = ">= 3.0.0" # Use latest if possible. See https://github.com/terraform-providers/terraform-provider-aws/releases
   region  = "ap-southeast-1"
 }
 
 # Random provider.
 provider "random" {
-  version = "v2.1.2" # Use latest if possible. See https://github.com/terraform-providers/terraform-provider-random/releases
+  version = "~> 2.1.2" # Use latest if possible. See https://github.com/terraform-providers/terraform-provider-random/releases
 }
 
 # AWS WAF Rules for OWASP Top 10 security risks protection.
@@ -67,7 +67,7 @@ module "webacl_supporting_resources" {
 
   s3_logging_bucket = "<bucket-for-logging>" # Logging bucket should be in the same region as the bucket
 
-  s3_kms_key_arn           = "xxxx"
+  s3_kms_key_arn           = "xxx"
   firehose_buffer_size     = "128"
   firehose_buffer_interval = "900"
 }
