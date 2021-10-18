@@ -145,4 +145,3 @@ resource "aws_wafregional_web_acl_association" "api" {
   resource_arn = "arn:aws:apigateway:ap-southeast-1::/restapis/<rest-api-id>/stages/<stage-name>" # ARN of the API Gateway stage
   web_acl_id   = aws_wafregional_web_acl.tsiwaf_webacl.id
 }
-
