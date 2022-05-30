@@ -4,15 +4,10 @@ provider "aws" {
   region  = "ap-southeast-1"
 }
 
-# Random provider.
-provider "random" {
-  version = "~> 2.1.2" # Use latest if possible. See https://github.com/terraform-providers/terraform-provider-random/releases
-}
-
 # AWS WAF Rules for OWASP Top 10 security risks protection.
 # For a better understanding of what are those parameters mean,
 # please read the description of each variable in the variables.tf file:
-# https://github.com/traveloka/terraform-aws-waf-owasp-top-10-rules/blob/master/variables.tf 
+# https://github.com/traveloka/terraform-aws-waf-owasp-top-10-rules/blob/master/variables.tf
 module "owasp_top_10_rules" {
   source = "git@github.com:traveloka/terraform-aws-waf-owasp-top-10-rules.git?ref=v1.0.0"
 
@@ -52,7 +47,7 @@ resource "aws_wafregional_rate_based_rule" "rate_limiter_rule" {
 # The module which is defined on this repository
 # For a better understanding of what are those parameters mean,
 # please read the description of each variable in the variables.tf file:
-# https://github.com/traveloka/terraform-aws-waf-webacl-supporting-resources/blob/master/variables.tf 
+# https://github.com/traveloka/terraform-aws-waf-webacl-supporting-resources/blob/master/variables.tf
 module "webacl_supporting_resources" {
   # This module is published on the registry: https://registry.terraform.io/modules/traveloka/waf-webacl-supporting-resources
 
@@ -87,8 +82,8 @@ resource "aws_wafregional_web_acl" "tsiwaf_webacl" {
     log_destination = module.webacl_supporting_resources.firehose_delivery_stream_arn
   }
 
-  # Configuration block with action that you want AWS WAF to take 
-  # when a request doesn't match the criteria in any of the rules 
+  # Configuration block with action that you want AWS WAF to take
+  # when a request doesn't match the criteria in any of the rules
   # that are associated with the web ACL.
   default_action {
     # Valid values are `ALLOW` and `BLOCK`.
@@ -105,14 +100,14 @@ resource "aws_wafregional_web_acl" "tsiwaf_webacl" {
     rule_id = module.owasp_top_10_rules.rule_group_id
 
     # Valid values are `GROUP`, `RATE_BASED`, and `REGULAR`
-    # The rule type, either REGULAR, as defined by Rule, 
-    # RATE_BASED, as defined by RateBasedRule, 
-    # or GROUP, as defined by RuleGroup. 
+    # The rule type, either REGULAR, as defined by Rule,
+    # RATE_BASED, as defined by RateBasedRule,
+    # or GROUP, as defined by RuleGroup.
     type = "GROUP"
 
     # Only used if type is `GROUP`.
-    # Override the action that a group requests CloudFront or AWS WAF takes 
-    # when a web request matches the conditions in the rule. 
+    # Override the action that a group requests CloudFront or AWS WAF takes
+    # when a web request matches the conditions in the rule.
     override_action {
       # Valid values are `NONE` and `COUNT`
       type = "NONE"
@@ -125,7 +120,7 @@ resource "aws_wafregional_web_acl" "tsiwaf_webacl" {
     type     = "RATE_BASED"
 
     # Only used if type is NOT `GROUP`.
-    # The action that CloudFront or AWS WAF takes 
+    # The action that CloudFront or AWS WAF takes
     # when a web request matches the conditions in the rule.
     action {
       # Valid values are `ALLOW`, `BLOCK`, and `COUNT`.
