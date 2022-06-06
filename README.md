@@ -8,6 +8,11 @@
 [![License](https://img.shields.io/github/license/traveloka/terraform-aws-waf-webacl-supporting-resources.svg)](https://github.com/traveloka/terraform-aws-waf-webacl-supporting-resources/blob/master/LICENSE)
 ![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)
 
+# Deprecation Notice
+Hi everyone, this module is now deprecated and will no longer be supported or updated.
+
+For Travelokans, please contact the Cloud Infra Team on slack to discuss WAFv2 implementation
+
 ## Description
 
 Terraform module to create resources needed by AWS WAF WebACL to:
